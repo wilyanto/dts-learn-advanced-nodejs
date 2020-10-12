@@ -3,10 +3,14 @@ import hbs from 'hbs'
 import path from 'path'
 import morgan from 'morgan'
 import bodyParseer from 'body-parser'
+import { initDatabase, initTable, insertProduct } from './database.js'
 
 const __dirname = path.resolve()
 
 const app = express()
+
+const db = initDatabase()
+initTable(db)
 
 app.set('views', __dirname + '/layouts')
 app.set('view engine', 'html')
@@ -35,6 +39,7 @@ app.get('/add-product', (req, res, next) => {
 
 app.post('/add-product', (req, res, next) => {
     console.log('Request', req.body)
+    insertProduct(db, req.body.name, parseInt(req.body.price), '-')
     res.send(req.body)
 })
 
