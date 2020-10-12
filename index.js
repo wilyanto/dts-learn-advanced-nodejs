@@ -15,6 +15,8 @@ app.engine('html', hbs.__express)
 app.use(morgan('combined'))
 
 // serve static file
+app.use('assets/', express.static(__dirname + 'assets'))
+
 app.get('/', (req, res, next) => {
     res.send({success: true})
 })
