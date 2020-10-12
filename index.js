@@ -3,7 +3,7 @@ import hbs from 'hbs'
 import path from 'path'
 import morgan from 'morgan'
 import bodyParseer from 'body-parser'
-import { initDatabase, initTable, insertProduct } from './database.js'
+import { initDatabase, initTable, insertProduct, getProduct} from './database.js'
 
 const __dirname = path.resolve()
 
@@ -30,7 +30,12 @@ app.get('/', (req, res, next) => {
 })
 
 app.get('/product', (req, res, next) => {
-    res.render('product')
+    getProduct(db).then(product => {
+        console.log('Product result: ', product)
+        res.render('product')
+    }).catch(error => {
+        console.error(error)
+    })  
 })
 
 app.get('/add-product', (req, res, next) => {
@@ -39,7 +44,12 @@ app.get('/add-product', (req, res, next) => {
 
 app.post('/add-product', (req, res, next) => {
     console.log('Request', req.body)
+
+    // insert product
     insertProduct(db, req.body.name, parseInt(req.body.price), '-')
+
+    // redirect
+    res.redirect('/product')
     res.send(req.body)
 })
 

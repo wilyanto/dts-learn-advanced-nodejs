@@ -48,12 +48,14 @@ export function insertProduct(db, name, price, photo) {
  * @param {sqlite.Database} db 
  */
 export function getProduct(db) {
-    db.all('SELECT * FROM product', (err, result) => {
-        if (err) {
-            console.log(err)
-            throw err
-        }
-        console.log(result)
-        return result
+    return new Promise((resolve, reject) => {
+        db.all('SELECT * FROM product', (err, result) => {
+            if (err) {
+                console.log(err)
+                throw err
+            }
+            console.log('Query result: ',result)
+            resolve(result)
+        })
     })
 }
