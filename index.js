@@ -42,14 +42,14 @@ app.get('/product', async (req, res, next) => {
     // console.log('Product result: ', product)
     // res.render('product')
 
-    let product
+    let products
     try {
-        product = await getProduct(db)
+        products = await getProduct(db)
     } catch (error) {
         return next(error)
     }
-    console.log('Product result: ', product)
-    res.render('product')
+    console.log('Product result: ', products)
+    res.render('product', {products})
 })
 
 app.get('/add-product', (req, res, next) => {

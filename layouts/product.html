@@ -38,15 +38,17 @@
               </tr>
             </thead>
             <tbody>
+              {{#each products}}
               <tr>
-                <th scope="row">1</th>
-                <td>Example</td>
-                <td>2000</td>
-                <td>-</td>
+                <th scope="row">{{ id }}</th>
+                <td>{{ name }}</td>
+                <td>{{ price }}</td>
+                <td>{{ photo }}</td>
                 <td>
                   <a href="#" type="button" class="btn btn-danger">Delete</a>
                 </td>
               </tr>
+              {{/each}}
             </tbody>
           </table>
         </div>
