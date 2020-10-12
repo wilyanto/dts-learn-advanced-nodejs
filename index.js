@@ -14,6 +14,10 @@ app.get('/', (req, res, next) => {
     res.send({success: true})
 })
 
+app.get('/product', (req, res, next) => {
+    res.render('product')
+})
+
 app.use((err, req, res, next) => {
     res.send(err.message)
 })
